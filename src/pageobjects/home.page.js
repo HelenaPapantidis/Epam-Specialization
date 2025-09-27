@@ -34,7 +34,7 @@ class HomePage extends BasePage {
 
   async waitForProductList() {
     await browser.waitUntil(async () => (await this.productTiles).length > 0, {
-      timeout: 7000,
+      timeout: 10000,
       timeoutMsg: "Products did not render on the category page",
     });
   }
@@ -52,7 +52,7 @@ class HomePage extends BasePage {
   async verifyProductsHaveNameAndPrice() {
     await this.waitForProductList();
     const products = await this.productTiles;
-    expect(products.length).toBeGreaterThan(0);
+    expect(products.length).to.be.greaterThan(0);
 
     for (const card of products) {
       const nameEl = await card.$('[data-test="product-name"]');

@@ -11,21 +11,29 @@
     "test:chrome": "npm run test -- chrome",
     "test:firefox": "npm run test -- firefox",
     "test:edge": "npm run test -- edge",
-    "test:all": "npm run test -- all"
+    "test:all": "npm run test -- all",
+    "test:chai": "wdio run ./wdio.chai.conf.js chrome",
+    "test:chai:registration": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/registration.feature",
+    "test:chai:login": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/login.feature",
+    "test:chai:categories": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/categories.feature",
+    "test:chai:favourite": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/favourite.feature"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@cucumber/cucumber": "^10.9.0",
     "@wdio/cli": "^9.19.2",
     "@wdio/cucumber-framework": "^9.19.2",
     "@wdio/local-runner": "^9.19.2",
     "@wdio/spec-reporter": "^9.19.2",
+    "chai": "^6.0.1",
     "cross-env": "^10.0.0",
     "dotenv": "^17.2.2",
     "expect-webdriverio": "^5.4.2",
     "fast-glob": "^3.3.3",
+    "minimatch": "^10.0.3",
     "wdio-wait-for": "^3.1.0"
   }
 }
