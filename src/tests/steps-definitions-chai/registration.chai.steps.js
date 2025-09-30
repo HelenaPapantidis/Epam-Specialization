@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
-const {LoginPage, RegistrationPage} = require("../po/index");
+const {LoginPage, RegistrationPage} = require("../../po/index");
 const { registrationUser } = require('../test-data/users'); 
 
 Given('the user is on the registration page', async () => {

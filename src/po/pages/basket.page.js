@@ -10,8 +10,8 @@ class BasketPage extends BasePage {
   }
 
   rowByName(name) {
-  return this.el(`//tr[.//span[@data-test="product-title" and contains(normalize-space(),"${name}")]]`);
-}
+    return this.el(`//tr[.//span[@data-test="product-title" and contains(normalize-space(),"${name}")]]`);
+  }
 
   removeBtnInRow(row) {
     return row.$(".btn.btn-danger");
@@ -38,12 +38,10 @@ class BasketPage extends BasePage {
   }
 
   async expectNoProducts() {
-<<<<<<< HEAD:src/pageobjects/basket.page.js
-    await expect(this.productList).toBeElementsArrayOfSize(0);
-=======
-    expect(this.rows).to.have.lengthOf(0);
->>>>>>> 7af3c71 (TAF refactor):src/po/pages/basket.page.js
-    await expect(this.emptyBasketMessage).toBeDisplayed();
+    const rowCount = await this.rows.length;
+    expect(rowCount).to.equal(0);
+    const message = await this.emptyBasketMessage;
+    expect(message).to.exist;
   }
 }
 

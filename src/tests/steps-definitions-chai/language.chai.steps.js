@@ -1,6 +1,5 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
-const { expect, assert } = require("chai");
-const { HomePage,Header } = require("../po/index");
+const { HomePage,Header } = require("../../po/index");
 
 Given("the user is on the home page", async () => {
   await HomePage.open();

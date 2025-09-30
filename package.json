@@ -3,27 +3,28 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "wdio run ./wdio.conf.js chrome",
-    "test:registration": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/registration.feature\"",
-    "test:login": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/login.feature\"",
-    "test:categories": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/categories.feature\"",
-    "test:favourite": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/favourite.feature\"",
-    "test:chrome": "npm run test -- chrome",
-    "test:firefox": "npm run test -- firefox",
-    "test:edge": "npm run test -- edge",
-<<<<<<< HEAD
-    "test:all": "npm run test -- all"
-=======
-    "test:all": "npm run test -- all",
-    "test:chai": "wdio run ./wdio.chai.conf.js chrome",
-    "test:chai:registration": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/registration.feature",
-    "test:chai:login": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/login.feature",
-    "test:chai:categories": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/categories.feature",
-    "test:chai:favourite": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/favourite.feature",
-    "test:chai:language": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/language.feature",
-    "test:chai:basket": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/basket.feature"
->>>>>>> 7af3c71 (TAF refactor)
-  },
+  "test": "wdio run ./wdio.conf.js chrome",
+  "test:registration": "wdio run ./wdio.conf.js chrome --spec=./src/tests/features/registration.feature",
+  "test:login": "wdio run ./wdio.conf.js chrome --spec=./src/tests/features/login.feature",
+  "test:categories": "wdio run ./wdio.conf.js chrome --spec=./src/tests/features/categories.feature",
+ 
+
+  "test:chrome": "npm run test -- chrome",
+  "test:firefox": "npm run test -- firefox",
+  "test:edge": "npm run test -- edge",
+  "test:all": "npm run test -- all",
+
+   "test:chai": "wdio run ./wdio.chai.conf.js chrome",
+  "test:chai:registration": "wdio run ./wdio.chai.conf.js chrome --spec=./src/tests/features/registration.feature",
+  "test:chai:login": "wdio run ./wdio.chai.conf.js chrome --spec=./src/tests/features/login.feature",
+  "test:chai:categories": "wdio run ./wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
+  
+
+  "test:chai:chrome": "npm run test:chai -- chrome",
+  "test:chai:firefox": "npm run test:chai -- firefox",
+  "test:chai:edge": "npm run test:chai -- edge",
+  "test:chai:all": "npm run test:chai -- all"
+},
 
   "keywords": [],
   "author": "",

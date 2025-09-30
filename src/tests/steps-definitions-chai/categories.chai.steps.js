@@ -1,6 +1,5 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-const { expect, assert } = require("chai");
-const { HomePage, CategoryPage, Header } = require("../po/index");
+const { HomePage, CategoryPage, Header } = require("../../po/index");
 
 Given("the user is on the homepage", async () => {
   await HomePage.open();

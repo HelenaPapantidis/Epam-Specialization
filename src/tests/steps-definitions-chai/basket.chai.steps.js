@@ -1,7 +1,5 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
-const { assert, expect } = require("chai");
-require("chai/register-should"); 
-const {HomePage, ProductDetailsPage, BasketPage, Header,} = require("../po/index");
+const {HomePage, ProductDetailsPage, BasketPage, Header,} = require("../../po/index");
 
 
 //  Assert style

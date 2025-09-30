@@ -1,5 +1,5 @@
-const { randomEmail } = require("../helpers/dataHelper");
-const { loginPassword } = require("../config/config.js");
+const { randomEmail } = require("../../helpers/dataHelper.js");
+const { loginPassword } = require("../../config/config.js");
 
 const email = randomEmail();
 

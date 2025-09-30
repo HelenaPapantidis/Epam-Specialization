@@ -1,6 +1,8 @@
 const BasePage = require("../pages/page.js");
-const { waitForToastToDisappear, safeClick } = require("../../helpers/waitHelper");
-
+const {
+  waitForToastToDisappear,
+  safeClick,
+} = require("../../helpers/waitHelper");
 
 class Header extends BasePage {
   get languageDropdownButton() {
@@ -43,23 +45,21 @@ class Header extends BasePage {
     await option.click();
   }
 
- async openBasket() {
-  // prvo sačekaj da nestane toast (ako se pojavi)
-  await waitForToastToDisappear(20000);
-
-  // klik na ikonicu korpe
-  const basket = await this.basketLink;
-  await safeClick(basket, 20000);
-
-  // sačekaj da URL bude checkout (ili da se pojavi element iz korpe)
-  await browser.waitUntil(async () => {
-    const url = await browser.getUrl();
-    return url.includes("/checkout");
-  }, {
-    timeout: 10000,
-    interval: 500,
-    timeoutMsg: "Basket page did not open"
-  });
-}
+  async openBasket() {
+    await waitForToastToDisappear(20000);
+    const basket = await this.basketLink;
+    await safeClick(basket, 20000);
+    await browser.waitUntil(
+      async () => {
+        const url = await browser.getUrl();
+        return url.includes("/checkout");
+      },
+      {
+        timeout: 10000,
+        interval: 500,
+        timeoutMsg: "Basket page did not open",
+      }
+    );
+  }
 }
 module.exports = new Header();

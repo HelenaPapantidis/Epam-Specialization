@@ -32,13 +32,8 @@ class HomePage extends BasePage {
   }
 
   async waitForProductList() {
-<<<<<<< HEAD:src/pageobjects/home.page.js
-    await browser.waitUntil(async () => (await this.productTiles).length > 0, {
-      timeout: 7000,
-=======
-    await browser.waitUntil(async () => (this.productTiles).length > 0, {
+  await browser.waitUntil(async () => (this.productTiles).length > 0, {
       timeout: 10000,
->>>>>>> 7af3c71 (TAF refactor):src/po/pages/home.page.js
       timeoutMsg: "Products did not render on the category page",
     });
   }
@@ -55,13 +50,8 @@ class HomePage extends BasePage {
 
   async verifyProductsHaveNameAndPrice() {
     await this.waitForProductList();
-<<<<<<< HEAD:src/pageobjects/home.page.js
-    const products = await this.productTiles;
-    expect(products.length).toBeGreaterThan(0);
-=======
     const products = this.productTiles;
     expect(products.length).to.be.greaterThan(0);
->>>>>>> 7af3c71 (TAF refactor):src/po/pages/home.page.js
 
     for (const card of products) {
       const nameEl = await card.$('[data-test="product-name"]');

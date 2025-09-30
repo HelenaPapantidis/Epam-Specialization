@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
-const {LoginPage, RegistrationPage} = require("../po/index");
-const {randomEmail} = require("../helpers/dataHelper.js");
+const {LoginPage, RegistrationPage} = require("../../po/index");
+const {randomEmail} = require("../../helpers/dataHelper.js");
 const { registrationUser } = require("../test-data/users");
 // ========================
 // POSITIVE LOGIN
