@@ -11,8 +11,20 @@
     "test:chrome": "npm run test -- chrome",
     "test:firefox": "npm run test -- firefox",
     "test:edge": "npm run test -- edge",
+<<<<<<< HEAD
     "test:all": "npm run test -- all"
+=======
+    "test:all": "npm run test -- all",
+    "test:chai": "wdio run ./wdio.chai.conf.js chrome",
+    "test:chai:registration": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/registration.feature",
+    "test:chai:login": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/login.feature",
+    "test:chai:categories": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/categories.feature",
+    "test:chai:favourite": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/favourite.feature",
+    "test:chai:language": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/language.feature",
+    "test:chai:basket": "wdio run ./wdio.chai.conf.js chrome --spec=./src/features/basket.feature"
+>>>>>>> 7af3c71 (TAF refactor)
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

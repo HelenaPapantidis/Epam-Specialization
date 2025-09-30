@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
-const {HomePage, Header} = require('../po/index');
-
+const { expect, assert } = require("chai");
+const { HomePage,Header } = require("../po/index");
 
 Given("the user is on the home page", async () => {
   await HomePage.open();
@@ -12,5 +12,5 @@ When("the user changes the language to {string}", async (lang) => {
 
 Then("the site should display the language as {string}", async (expectedLang) => {
   const currentLang = await Header.getSelectedLanguageText();
-  await expect(currentLang).toContain(expectedLang);
+  expect(await currentLang).to.contain(expectedLang);
 });

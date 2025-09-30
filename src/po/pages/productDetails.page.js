@@ -1,4 +1,4 @@
-const BasePage = require("./page.js");
+const BasePage = require("../pages/page.js");
 const { expect } = require("@wdio/globals");
 
 class ProductDetailsPage extends BasePage {
