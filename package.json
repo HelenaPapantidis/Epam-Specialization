@@ -14,11 +14,11 @@
   "test:edge": "npm run test -- edge",
   "test:all": "npm run test -- all",
 
-   "test:chai": "wdio run ./wdio.chai.conf.js chrome",
-  "test:chai:registration": "wdio run ./wdio.chai.conf.js chrome --spec=./src/tests/features/registration.feature",
-  "test:chai:login": "wdio run ./wdio.chai.conf.js chrome --spec=./src/tests/features/login.feature",
-  "test:chai:categories": "wdio run ./wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
-  
+   "test:chai": "wdio run ./src/config/wdio.chai.conf.js chrome",
+  "test:chai:registration": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/registration.feature",
+  "test:chai:login": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/login.feature",
+  "test:chai:categories": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
+
 
   "test:chai:chrome": "npm run test:chai -- chrome",
   "test:chai:firefox": "npm run test:chai -- firefox",
