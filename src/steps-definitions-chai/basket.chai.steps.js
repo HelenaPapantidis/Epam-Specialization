@@ -1,6 +1,4 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
-const { assert, expect } = require("chai");
-require("chai/register-should"); // aktivira should() //this needs to be added seaparately
 
 const HomePage = require("../pageobjects/home.page.js");
 const ProductDetailsPage = require("../pageobjects/productDetails.page.js");

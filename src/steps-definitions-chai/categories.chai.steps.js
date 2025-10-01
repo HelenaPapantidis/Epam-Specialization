@@ -1,5 +1,5 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const { expect, assert } = require("chai");
+const { Given, When, Then } = require("@wdio/cucumber/cucumber");
+
 const HomePage = require("../pageobjects/home.page");
 const NavPage = require("../pageobjects/nav.page");
 const CategoryPage = require("../pageobjects/category.page");

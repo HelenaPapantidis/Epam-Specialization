@@ -1,5 +1,4 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
-const { expect ,assert} = require('chai');
 const RegistrationPage = require('../pageobjects/registration.page.js');
 const LoginPage = require('../pageobjects/login.page.js');
 
