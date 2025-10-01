@@ -11,7 +11,10 @@
     "test:chrome": "npm run test -- chrome",
     "test:firefox": "npm run test -- firefox",
     "test:edge": "npm run test -- edge",
-    "test:all": "npm run test -- all"
+    "test:all": "npm run test -- all",
+
+   "test:api": "mocha ./src/tests/*.test.js"
+
   },
   "keywords": [],
   "author": "",
@@ -22,10 +25,13 @@
     "@wdio/cucumber-framework": "^9.19.2",
     "@wdio/local-runner": "^9.19.2",
     "@wdio/spec-reporter": "^9.19.2",
+    "chai": "^6.2.0",
     "cross-env": "^10.0.0",
     "dotenv": "^17.2.2",
     "expect-webdriverio": "^5.4.2",
     "fast-glob": "^3.3.3",
+    "mocha": "^11.7.3",
+    "supertest": "^7.1.4",
     "wdio-wait-for": "^3.1.0"
   }
 }
