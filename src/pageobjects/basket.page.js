@@ -38,7 +38,7 @@ class BasketPage extends BasePage {
   }
 
   async expectNoProducts() {
-    await expect(this.productList).toBeElementsArrayOfSize(0);
+    expect(await this.productList).to.have.lengthOf(0);
     await expect(this.emptyBasketMessage).toBeDisplayed();
   }
 }
