@@ -15,6 +15,7 @@
   "test:chai:categories": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
   "test:chai:language": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/language.feature",
   "test:chai:basket": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/basket.feature",
+  "test:chai:headless": "cross-env HEADLESS=true wdio run ./src/config/wdio.chai.conf.js chrome",
 
    "test:api": "mocha ./src/tests/api/*.test.js"
 

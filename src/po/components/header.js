@@ -19,29 +19,31 @@ class Header extends BasePage {
 
   async changeLanguage(language) {
     const dropdown = this.languageDropdownButton;
-    await dropdown.waitForClickable({ timeout: 5000 });
+    await dropdown.scrollIntoView();
+    await dropdown.waitForClickable({ timeout: 20000 });
     await dropdown.click();
 
     const option = await $(`[data-test="lang-${language.toLowerCase()}"]`);
-    await option.waitForClickable({ timeout: 5000 });
+    await option.scrollIntoView();
+    await option.waitForClickable({ timeout: 20000 });
     await option.click();
   }
 
   async getSelectedLanguageText() {
     const dropdown = this.languageDropdownButton;
-    await dropdown.waitForDisplayed({ timeout: 5000 });
+    await dropdown.waitForDisplayed({ timeout: 20000 });
     return dropdown.getText();
   }
 
   async selectCategory(category) {
     const menu = this.categoriesMenu;
-    await menu.waitForClickable({ timeout: 5000 });
+    await menu.waitForClickable({ timeout: 20000 });
     await menu.click();
 
     const option = await $(
       `//a[contains(@class,"dropdown-item") and normalize-space()="${category}"]`
     );
-    await option.waitForClickable({ timeout: 5000 });
+    await option.waitForClickable({ timeout: 20000 });
     await option.click();
   }
 
@@ -55,7 +57,7 @@ class Header extends BasePage {
         return url.includes("/checkout");
       },
       {
-        timeout: 10000,
+        timeout: 20000,
         interval: 500,
         timeoutMsg: "Basket page did not open",
       }

@@ -36,12 +36,21 @@ pipeline {
             }
         }
 
+        stage('Create .env file') {
+            steps {
+                withCredentials([string(credentialsId: 'loginPassword', variable: 'LOGIN_PASSWORD')]) {
+                    bat """
+                        echo BASE_URL=${BASE_URL} > .env
+                        echo LOGIN_PASSWORD=%LOGIN_PASSWORD% >> .env
+                    """
+                }
+            }
+        }
+
         stage('Run UI tests') {
             when { expression { params.TEST_TYPE == 'UI' } }
             steps {
-                withCredentials([string(credentialsId: 'loginPassword', variable: 'LOGIN_PASSWORD')]) {
-                    bat 'npm run test:chai'
-                }
+                bat 'npm run test:chai'
             }
         }
 
