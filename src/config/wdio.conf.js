@@ -27,7 +27,7 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["./src/features/**/*.feature"],
+  specs: ["./src/tests/features/**/*.feature"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -60,7 +60,7 @@ capabilities:
           {
             browserName: "chrome",
             "goog:chromeOptions": {
-              args: HEADLESS ? ["--headless=new"] : [],
+              args: HEADLESS ? ["--headless=new", "--window-size=1920,1080"] : ["--window-size=1920,1080"],
             },
           },
           {
@@ -128,7 +128,7 @@ capabilities:
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "https://practicesoftwaretesting.com",
+  baseUrl: process.env.BASE_URL,
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -171,7 +171,7 @@ capabilities:
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
-    require: fg.sync(["./src/step-definitions/**/*.js"]),
+     require: fg.sync(["./src/tests/step-definitions/**/*.js"]),
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
