@@ -1,4 +1,4 @@
-const BasePage = require("./page.js");
+const BasePage = require("../pages/page.js");
 
 class RegisterPage extends BasePage {
   get form() {
@@ -42,32 +42,29 @@ class RegisterPage extends BasePage {
   get submit() {
     return this.el('[data-test="register-submit"]');
   }
-  get error() {
-    return this.el('[data-test="register-error"]');
-  }
+
   /* ===========================
    * ACTIONS
    * ===========================
    */
-
-  async waitOpened() {
-    await this.form.waitForExist({ timeout: 10000 });
+  async openRegistrationPage() {
+    await this.open("auth/register");
   }
 
-  async registerNewUser({ first, last, birth, addr, contact, creds }) {
-    await this.waitOpened();
+  async registerNewUser(user) {
+    await this.waitUntilExists(this.form);
 
-    await this.firstName.setValue(first);
-    await this.lastName.setValue(last);
-    await this.dob.setValue(birth);
-    await this.street.setValue(addr.street);
-    await this.postalCode.setValue(addr.postal);
-    await this.city.setValue(addr.city);
-    await this.state.setValue(addr.state);
+    await this.type(this.firstName, user.first);
+    await this.type(this.lastName, user.last);
+    await this.type(this.dob, user.birth);
+    await this.type(this.street, user.addr.street);
+    await this.type(this.postalCode, user.addr.postal);
+    await this.type(this.city, user.addr.city);
+    await this.type(this.state, user.addr.state);
     await this.country.selectByVisibleText("Serbia");
-    await this.phone.setValue(contact.phone);
-    await this.email.setValue(creds.email);
-    await this.password.setValue(creds.password);
+    await this.type(this.phone, user.contact.phone);
+    await this.type(this.email, user.email);
+    await this.type(this.password, user.password);
 
     await this.submit.click();
   }

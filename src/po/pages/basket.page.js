@@ -1,17 +1,17 @@
-const BasePage = require("../pageobjects/page.js");
+const BasePage = require("../pages/page");
 
 class BasketPage extends BasePage {
   get emptyBasketMessage() {
     return this.el('//*[contains(text(),"The cart is empty")]');
   }
 
-  get productList() {
+  get rows() {
     return this.els("table tbody tr");
   }
 
   rowByName(name) {
-  return this.el(`//tr[.//span[@data-test="product-title" and contains(normalize-space(),"${name}")]]`);
-}
+    return this.el(`//tr[.//span[@data-test="product-title" and contains(normalize-space(),"${name}")]]`);
+  }
 
   removeBtnInRow(row) {
     return row.$(".btn.btn-danger");
@@ -26,20 +26,22 @@ class BasketPage extends BasePage {
    */
 
   async removeProduct(name) {
-    const row = await this.rowByName(name);
+    const row = this.rowByName(name);
     const removeBtn = await this.removeBtnInRow(row);
     await removeBtn.click();
   }
 
   async updateQuantity(name, qty) {
-    const row = await this.rowByName(name);
+    const row = this.rowByName(name);
     const qtyInput = await this.qtyInputInRow(row);
     await qtyInput.setValue(qty);
   }
 
   async expectNoProducts() {
-    expect(await this.productList).to.have.lengthOf(0);
-    await expect(this.emptyBasketMessage).toBeDisplayed();
+    const rowCount = await this.rows.length;
+    expect(rowCount).to.equal(0);
+    const message = await this.emptyBasketMessage;
+    expect(message).to.exist;
   }
 }
 
