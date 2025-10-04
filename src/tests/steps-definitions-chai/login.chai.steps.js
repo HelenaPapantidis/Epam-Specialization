@@ -10,7 +10,7 @@ let testEmail;
 Given(
   "the user has a registered account and is on the login page",
   async () => {
-     testEmail = randomEmail(); // napravi svež email za ovaj scenario
+     testEmail = randomEmail(); 
   const newUser = { ...registrationUser, email: testEmail };
     await RegistrationPage.openRegistrationPage();
     await RegistrationPage.registerNewUser(newUser);
@@ -18,7 +18,7 @@ Given(
 );
 
 When("the user enters valid login credentials", async () => {
-   await LoginPage.login(testEmail, registrationUser.password);
+   await LoginPage.login(testEmail, process.env.LOGIN_PASSWORD);
 });
 
 When("the user clicks the {string} button", async (btnText) => {

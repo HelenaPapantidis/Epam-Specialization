@@ -21,13 +21,14 @@ class HomePage extends BasePage {
    * ACTIONS
    * =========================== */
 
-  async open(path = "/") {
-    await super.open(path);
-  }
+  async openHomePage() {
+  await super.open();
+}
+
   async goToProductDetailsPage(productName) {
-    await this.open("/");
+    await this.openHomePage();  
     const product = await this.productByName(productName);
-    await product.waitForDisplayed({ timeout: 7000 });
+    await product.waitForDisplayed({ timeout: 10000 });
     await product.click();
   }
 

@@ -21,8 +21,5 @@ module.exports = {
     password: loginPassword,
   },
 
-  loginCreds: {
-    email: email, 
-    password: loginPassword, 
-  },
+ 
 };

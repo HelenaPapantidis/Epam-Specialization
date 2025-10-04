@@ -14,7 +14,7 @@ pipeline {
     triggers { cron('H */2 * * *') }   // svaka 2 sata
 
     environment {
-        HEADLESS = 'true'
+        BASE_URL = 'https://practicesoftwaretesting.com'
     }
 
     stages {
@@ -39,7 +39,9 @@ pipeline {
         stage('Run UI tests') {
             when { expression { params.TEST_TYPE == 'UI' } }
             steps {
-                bat 'npm run test:chai'
+                withCredentials([string(credentialsId: 'loginPassword', variable: 'LOGIN_PASSWORD')]) {
+                    bat 'npm run test:chai'
+                }
             }
         }
 
