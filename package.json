@@ -3,29 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "test": "wdio run ./wdio.conf.js chrome",
-  "test:registration": "wdio run ./wdio.conf.js chrome --spec=./src/tests/features/registration.feature",
-  "test:login": "wdio run ./wdio.conf.js chrome --spec=./src/tests/features/login.feature",
-  "test:categories": "wdio run ./wdio.conf.js chrome --spec=./src/tests/features/categories.feature",
- 
+    "test": "wdio run ./wdio.conf.js chrome",
+    "test:registration": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/registration.feature\"",
+    "test:login": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/login.feature\"",
+    "test:categories": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/categories.feature\"",
+    "test:favourite": "wdio run ./wdio.conf.js chrome --spec=\"./src/features/favourite.feature\"",
+    "test:chrome": "npm run test -- chrome",
+    "test:firefox": "npm run test -- firefox",
+    "test:edge": "npm run test -- edge",
+    "test:all": "npm run test -- all",
 
-  "test:chrome": "npm run test -- chrome",
-  "test:firefox": "npm run test -- firefox",
-  "test:edge": "npm run test -- edge",
-  "test:all": "npm run test -- all",
+   "test:api": "mocha ./src/tests/*.test.js"
 
-   "test:chai": "wdio run ./src/config/wdio.chai.conf.js chrome",
-  "test:chai:registration": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/registration.feature",
-  "test:chai:login": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/login.feature",
-  "test:chai:categories": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
-
-
-  "test:chai:chrome": "npm run test:chai -- chrome",
-  "test:chai:firefox": "npm run test:chai -- firefox",
-  "test:chai:edge": "npm run test:chai -- edge",
-  "test:chai:all": "npm run test:chai -- all"
-},
-
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -35,11 +25,13 @@
     "@wdio/cucumber-framework": "^9.19.2",
     "@wdio/local-runner": "^9.19.2",
     "@wdio/spec-reporter": "^9.19.2",
-    "chai": "^6.0.1",
+    "chai": "^6.2.0",
     "cross-env": "^10.0.0",
     "dotenv": "^17.2.2",
     "expect-webdriverio": "^5.4.2",
     "fast-glob": "^3.3.3",
+    "mocha": "^11.7.3",
+    "supertest": "^7.1.4",
     "wdio-wait-for": "^3.1.0"
   }
 }
