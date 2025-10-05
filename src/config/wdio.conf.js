@@ -1,7 +1,9 @@
+const {ReportAggregator, HtmlReporter} = require('wdio-html-nice-reporter');
+let reportAggregator;
 const fg = require("fast-glob");
-require('dotenv').config();
+require("dotenv").config();
 
-const HEADLESS = process.env.HEADLESS === 'true';
+const HEADLESS = process.env.HEADLESS === "true";
 const cliBrowser = process.argv[4] && process.argv[4].toLowerCase();
 const browserName = cliBrowser || process.env.BROWSER || "chrome";
 
@@ -27,7 +29,7 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ['../tests/features/**/*.feature'],
+  specs: ["../tests/features/**/*.feature"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -54,13 +56,15 @@ exports.config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
-capabilities:
+  capabilities:
     browserName === "all"
       ? [
           {
             browserName: "chrome",
             "goog:chromeOptions": {
-              args: HEADLESS ? ["--headless=new", "--window-size=1920,1080"] : ["--window-size=1920,1080"],
+              args: HEADLESS
+                ? ["--headless=new", "--window-size=1920,1080"]
+                : ["--window-size=1920,1080"],
             },
           },
           {
@@ -167,11 +171,43 @@ capabilities:
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+ reporters: ['spec',
+        ["html-nice", {
+            outputDir: './reports/html-reports/',
+            filename: 'report.html',
+            reportTitle: 'Test Report Title',
+            linkScreenshots: true,
+            //to show the report in a browser when done
+            showInBrowser: true,
+            collapseTests: false,
+            //to turn on screenshots after every test
+            useOnAfterCommandForScreenshot: true,
+               produceJson: true,
+        }
+        ]
+    ],
+      onPrepare: function(config, capabilities) {
+
+    reportAggregator = new ReportAggregator({
+        outputDir: './reports/html-reports/',
+        filename: 'master-report.html',
+        reportTitle: 'Master Report',
+        browserName: capabilities.browserName,
+    });
+    reportAggregator.clean();
+},
+
+
+onComplete: function (exitCode, config, capabilities, results) {
+    (async () => {
+        await reportAggregator.createReport();
+    })();
+},
+
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
-     require: fg.sync(["./src/tests/step-definitions/**/*.js"]),
+    require: fg.sync(["./src/tests/step-definitions/**/*.js"]),
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -209,8 +245,7 @@ capabilities:
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -351,8 +386,10 @@ capabilities:
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+ 
+
+  
+
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session
