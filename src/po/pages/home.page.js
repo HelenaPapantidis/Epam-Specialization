@@ -22,18 +22,18 @@ class HomePage extends BasePage {
    * =========================== */
 
   async openHomePage() {
-  await super.open();
-}
+    await super.open();
+  }
 
   async goToProductDetailsPage(productName) {
-    await this.openHomePage();  
+    await this.openHomePage();
     const product = await this.productByName(productName);
     await product.waitForDisplayed({ timeout: 10000 });
     await product.click();
   }
 
   async waitForProductList() {
-  await browser.waitUntil(async () => (this.productTiles).length > 0, {
+    await browser.waitUntil(async () => this.productTiles.length > 0, {
       timeout: 10000,
       timeoutMsg: "Products did not render on the category page",
     });

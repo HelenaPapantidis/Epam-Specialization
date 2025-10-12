@@ -5,36 +5,34 @@ const LoginPage = require("../pageobjects/login.page.js");
 // ========================
 // POSITIVE LOGIN
 // ========================
-Given("the user has a registered account and is on the login page",
-  async () => {
-    const uniqueEmail = `qa_${Date.now()}@test.com`;
+Given("the user has a registered account and is on the login page", async () => {
+  const uniqueEmail = `qa_${Date.now()}@test.com`;
 
-    await browser.url("/auth/register");
-    await RegistrationPage.registerNewUser({
-      first: "Login",
-      last: "Tester",
-      birth: "1990-01-01",
-      addr: {
-        street: "Main Street 1",
-        postal: "21000",
-        city: "Novi Sad",
-        state: "Serbia",
-      },
-      contact: { phone: "38160111222" },
-      creds: { email: uniqueEmail, password: "SomePass@123" },
-    });
+  await browser.url("/auth/register");
+  await RegistrationPage.registerNewUser({
+    first: "Login",
+    last: "Tester",
+    birth: "1990-01-01",
+    addr: {
+      street: "Main Street 1",
+      postal: "21000",
+      city: "Novi Sad",
+      state: "Serbia",
+    },
+    contact: { phone: "38160111222" },
+    creds: { email: uniqueEmail, password: "SomePass@123" },
+  });
 
-    await LoginPage.expectOnLoginPage();
-    global.registeredEmail = uniqueEmail;
-  }
-);
+  await LoginPage.expectOnLoginPage();
+  global.registeredEmail = uniqueEmail;
+});
 
 When("the user enters valid login credentials", async () => {
   await LoginPage.typeEmail(global.registeredEmail);
   await LoginPage.typePassword("SomePass@123");
 });
 
-When("the user clicks the {string} button", async (btnText) => {
+When("the user clicks the {string} button", async () => {
   await LoginPage.clickLogin();
 });
 

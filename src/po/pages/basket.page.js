@@ -10,7 +10,9 @@ class BasketPage extends BasePage {
   }
 
   rowByName(name) {
-    return this.el(`//tr[.//span[@data-test="product-title" and contains(normalize-space(),"${name}")]]`);
+    return this.el(
+      `//tr[.//span[@data-test="product-title" and contains(normalize-space(),"${name}")]]`
+    );
   }
 
   removeBtnInRow(row) {
@@ -20,10 +22,8 @@ class BasketPage extends BasePage {
   qtyInputInRow(row) {
     return row.$("//input[@data-test='quantity']");
   }
-/* ===========================
-   * ACTIONS
-   * ===========================
-   */
+
+  // ACTIONS
 
   async removeProduct(name) {
     const row = this.rowByName(name);

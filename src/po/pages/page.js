@@ -1,11 +1,11 @@
-const { browser } = require('@wdio/globals');
-const { baseUrl } = require('../../config/config');
+const { browser } = require("@wdio/globals");
+const { baseUrl } = require("../../config/config");
 class BasePage {
   /**
    * Open page by path
    * @param {string} path - url path (default = '/')
    */
-  async open(path = '/') {
+  async open(path = "/") {
     await browser.url(`${baseUrl}/${path}`);
   }
 
@@ -29,42 +29,45 @@ class BasePage {
 
   /**
    * Click on element
-   * @param {Element} el
+   * @param {Element} element
    */
-  async click(el) {
-    await el.waitForDisplayed({ timeout: 10000 });
-    await el.scrollIntoView();
-    await el.click();
+  async click(element) {
+    await element.waitForDisplayed({ timeout: 10000 });
+    await element.scrollIntoView();
+    await element.click();
   }
 
   /**
    * Type text into input
-   * @param {Element} el
+   * @param {Element} element
    * @param {string} text
    */
-  async type(el, text) {
+  async type(element, text) {
+    const el = await element;
     await el.waitForDisplayed({ timeout: 10000 });
-    await el.setValue(text);
+    await el.clearValue();
+    await el.setValue(String(text));
   }
 
   /**
    * Get text of element
-   * @param {Element} el
+   * @param {Element} element
    * @returns {Promise<string>}
    */
-  async getText(el) {
+  async getText(element) {
+    const el = await element;
     await el.waitForDisplayed({ timeout: 10000 });
     return await el.getText();
   }
 
   /**
    * Check if element is visible
-   * @param {Element} el
+   * @param {Element} element
    * @returns {Promise<boolean>}
    */
-  async isVisible(el) {
+  async isVisible(element) {
     try {
-      return await el.isDisplayed();
+      return await element.isDisplayed();
     } catch (err) {
       return false;
     }
@@ -83,23 +86,22 @@ class BasePage {
     } catch (err) {
       throw new Error(`Element ${el.selector} did not exist after ${timeout}ms`);
     }
-}
-
-/**
- * Wait until element is visible on the page
- * Throws a custom error if element is not displayed within timeout
- * @param {Element} el - WebdriverIO element
- * @param {number} [timeout=10000] - Maximum wait time in ms
- * @throws {Error} if element is not visible within timeout
- */
-async waitUntilVisible(el, timeout = 10000) {
-  try {
-    await el.waitForDisplayed({ timeout });
-  } catch (err) {
-    throw new Error(`Element ${el.selector} was not visible after ${timeout}ms`);
   }
-}
 
+  /**
+   * Wait until element is visible on the page
+   * Throws a custom error if element is not displayed within timeout
+   * @param {Element} el - WebdriverIO element
+   * @param {number} [timeout=10000] - Maximum wait time in ms
+   * @throws {Error} if element is not visible within timeout
+   */
+  async waitUntilVisible(el, timeout = 10000) {
+    try {
+      await el.waitForDisplayed({ timeout });
+    } catch (err) {
+      throw new Error(`Element ${el.selector} was not visible after ${timeout}ms`);
+    }
+  }
 }
 
 module.exports = BasePage;

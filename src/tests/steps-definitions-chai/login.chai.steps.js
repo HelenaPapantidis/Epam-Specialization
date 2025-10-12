@@ -1,37 +1,43 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
-const {LoginPage, RegistrationPage} = require("../../po/index");
-const {randomEmail} = require("../../helpers/dataHelper.js");
+const { LoginPage, RegistrationPage } = require("../../po/index");
+const { randomEmail } = require("../../helpers/dataHelper.js");
 const { registrationUser } = require("../test-data/users");
-// ========================
+const { loginPassword } = require("../../config/config.js");
+
 // POSITIVE LOGIN
-// ========================
+
 let testEmail;
 
-Given(
-  "the user has a registered account and is on the login page",
-  async () => {
-     testEmail = randomEmail(); 
+Given("the user has a registered account and is on the login page", async () => {
+  testEmail = randomEmail();
   const newUser = { ...registrationUser, email: testEmail };
-    await RegistrationPage.openRegistrationPage();
-    await RegistrationPage.registerNewUser(newUser);
-  }
-);
+  await RegistrationPage.openRegistrationPage();
+  await RegistrationPage.registerNewUser(newUser);
+  await LoginPage.expectOnLoginPage();
+});
 
 When("the user enters valid login credentials", async () => {
-   await LoginPage.login(testEmail, process.env.LOGIN_PASSWORD);
+  await LoginPage.login(testEmail, loginPassword);
 });
 
 When("the user clicks the {string} button", async (btnText) => {
-  await LoginPage.clickLogin();
+  if (btnText.toLowerCase() === "login") {
+    // proveri da li si i dalje na login strani pre nego što klikneš
+    const currentUrl = await browser.getUrl();
+    if (currentUrl.includes("/auth/login")) {
+      await LoginPage.clickLogin();
+    } else {
+      console.log("⚠️ Already redirected, skipping login click");
+    }
+  }
 });
 
 Then("the user should be redirected to the account page", async () => {
   await LoginPage.expectOnAccountPage();
 });
 
-// ========================
 // NEGATIVE LOGIN – REQUIRED FIELDS
-// ========================
+
 Given("the user is on the login page", async () => {
   await LoginPage.openLoginPage();
   await LoginPage.expectOnLoginPage();

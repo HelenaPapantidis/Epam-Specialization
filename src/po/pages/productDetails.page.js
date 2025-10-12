@@ -17,10 +17,9 @@ class ProductDetailsPage extends BasePage {
 
   get addToFavouritesButton() {
     return this.el('[data-test="add-to-favorites"]');
-
   }
-  get toastMessage(){
-    return this.el('#toast-container');
+  get toastMessage() {
+    return this.el("#toast-container");
   }
 
   // === ACTIONS ===
@@ -48,15 +47,11 @@ class ProductDetailsPage extends BasePage {
   async expectTitle(productName) {
     await expect(this.productTitle).toHaveText(productName);
   }
-  get toastMessage() {
-  return this.el('#toast-container');
-}
 
-async expectToastMessage(text) {
-  await this.toastMessage.waitForDisplayed({ timeout: 5000 });
-  await expect(this.toastMessage).toHaveText(text);
-}
-
+  async expectToastMessage(text) {
+    await this.toastMessage.waitForDisplayed({ timeout: 5000 });
+    await expect(this.toastMessage).toHaveText(text);
+  }
 }
 
 module.exports = new ProductDetailsPage();

@@ -3,22 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "test:cucumber": "wdio run ./src/config/wdio.conf.js chrome",
-  "test:cucumber:registration": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/registration.feature",
-  "test:cucumber:login": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/login.feature",
-  "test:cucumber:categories": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/categories.feature",
-  "test:cucumber:language": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/language.feature",
-
- "test:chai": "wdio run ./src/config/wdio.chai.conf.js chrome",
-  "test:chai:registration": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/registration.feature",
-  "test:chai:login": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/login.feature",
-  "test:chai:categories": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
-  "test:chai:language": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/language.feature",
-  "test:chai:basket": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/basket.feature",
-  "test:chai:headless": "cross-env HEADLESS=true wdio run ./src/config/wdio.chai.conf.js chrome",
-
-   "test:api": "mocha ./src/tests/api/*.test.js"
-
+    "test:cucumber": "wdio run ./src/config/wdio.conf.js chrome",
+    "test:cucumber:registration": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/registration.feature",
+    "test:cucumber:login": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/login.feature",
+    "test:cucumber:categories": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/categories.feature",
+    "test:cucumber:language": "wdio run ./src/config/wdio.conf.js chrome --spec=./src/tests/features/language.feature",
+    "test:chai": "wdio run ./src/config/wdio.chai.conf.js chrome",
+    "test:chai:registration": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/registration.feature",
+    "test:chai:login": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/login.feature",
+    "test:chai:categories": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
+    "test:chai:language": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/language.feature",
+    "test:chai:basket": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/basket.feature",
+    "test:chai:headless": "cross-env HEADLESS=true wdio run ./src/config/wdio.chai.conf.js chrome",
+    "test:api": "mocha ./src/tests/api/*.test.js",
+    "lint": "eslint ./src --ext .js",
+    "lint:fix": "eslint ./src --ext .js --fix",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -32,9 +32,13 @@
     "chai": "^6.2.0",
     "cross-env": "^10.0.0",
     "dotenv": "^17.2.2",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.4",
     "expect-webdriverio": "^5.4.2",
     "fast-glob": "^3.3.3",
     "mocha": "^11.7.3",
+    "prettier": "^3.6.2",
     "supertest": "^7.1.4",
     "wdio-wait-for": "^3.1.0"
   }

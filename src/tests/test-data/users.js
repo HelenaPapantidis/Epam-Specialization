@@ -1,7 +1,5 @@
-const { randomEmail } = require("../../helpers/dataHelper.js");
 const { loginPassword } = require("../../config/config.js");
-
-const email = randomEmail();
+const { randomEmail } = require("../../helpers/dataHelper.js");
 
 module.exports = {
   registrationUser: {
@@ -13,13 +11,12 @@ module.exports = {
       postal: "11000",
       city: "Belgrade",
       state: "Serbia",
+      country: "Serbia",
     },
     contact: {
       phone: "381601234567",
     },
-    email: email,
+    email: randomEmail(),
     password: loginPassword,
   },
-
- 
 };

@@ -1,9 +1,7 @@
+// generiše random email da svaki put može nova registracija
 function randomEmail() {
-  return `qa_${Date.now()}@test.com`;
+  const timestamp = Date.now();
+  return `qa.user.${timestamp}@test.com`;
 }
 
-
-module.exports = {
-  randomEmail,
-  
-};
+module.exports = { randomEmail };
