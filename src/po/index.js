@@ -17,5 +17,5 @@ module.exports = {
   BasketPage,
   CategoryPage,
   RegistrationPage,
-  ProductDetailsPage
+  ProductDetailsPage,
 };

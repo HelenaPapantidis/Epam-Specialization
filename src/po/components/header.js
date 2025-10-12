@@ -1,8 +1,5 @@
 const BasePage = require("../pages/page.js");
-const {
-  waitForToastToDisappear,
-  safeClick,
-} = require("../../helpers/waitHelper");
+const { waitForToastToDisappear } = require("../../helpers/waitHelper");
 
 class Header extends BasePage {
   get languageDropdownButton() {
@@ -48,20 +45,29 @@ class Header extends BasePage {
   }
 
   async openBasket() {
+    await browser.pause(2000);
     await waitForToastToDisappear(20000);
-    const basket = await this.basketLink;
-    await safeClick(basket, 20000);
+
     await browser.waitUntil(
       async () => {
-        const url = await browser.getUrl();
-        return url.includes("/checkout");
+        const basketExists = await this.basketLink.isExisting();
+        return basketExists;
       },
       {
         timeout: 20000,
-        interval: 500,
-        timeoutMsg: "Basket page did not open",
+        timeoutMsg: "Basket icon not found in header after adding product",
       }
     );
+
+    const basket = await this.basketLink;
+    await basket.scrollIntoView();
+    await basket.waitForClickable({ timeout: 20000 });
+    await basket.click();
+
+    await browser.waitUntil(async () => (await browser.getUrl()).includes("/checkout"), {
+      timeout: 20000,
+      timeoutMsg: "Basket page did not open",
+    });
   }
 }
 module.exports = new Header();

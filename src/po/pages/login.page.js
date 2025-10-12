@@ -1,17 +1,14 @@
 const BasePage = require("../pages/page.js");
-const { loginEmail, loginPassword } = require("../../config/config");
 
 class LoginPage extends BasePage {
-  /* ===========================
-   * NAVIGATION
-   * =========================== */
+  //NAVIGATION
+
   async openLoginPage() {
     await this.open("auth/login");
   }
 
-  /* ===========================
-   * SELECTORS - INPUTS
-   * =========================== */
+  // SELECTORS - INPUTS
+
   get emailInput() {
     return this.el('input[data-test="email"]');
   }
@@ -22,9 +19,8 @@ class LoginPage extends BasePage {
     return this.el('[data-test="login-submit"]');
   }
 
-  /* ===========================
-   * SELECTORS - ERRORS
-   * =========================== */
+  // SELECTORS - ERRORS
+
   get emailError() {
     return this.el('[data-test="email-error"]');
   }
@@ -32,13 +28,8 @@ class LoginPage extends BasePage {
     return this.el('[data-test="password-error"]');
   }
 
-  /* ===========================
-   * ACTIONS
-   * =========================== */
+  //ACTIONS
 
-  async openLoginPage() {
-    await this.open("auth/login");
-  }
   async typeEmail(email) {
     await this.type(this.emailInput, email);
   }
@@ -48,7 +39,11 @@ class LoginPage extends BasePage {
   }
 
   async clickLogin() {
-    await this.click(this.loginButton);
+    const button = await this.loginButton;
+    await button.waitForDisplayed({ timeout: 20000 });
+    await button.waitForEnabled({ timeout: 20000 });
+    await browser.pause(300);
+    await button.click();
   }
 
   async login(email, password) {
@@ -56,28 +51,35 @@ class LoginPage extends BasePage {
     await this.typeEmail(email);
     await this.typePassword(password);
     await this.clickLogin();
+    await browser.pause(1500);
   }
 
-  /* ===========================
-   * ASSERTIONS (WDIO expect)
-   * =========================== */
- async expectOnLoginPage() {
-  // čekaj da login dugme bude vidljivo (siguran indikator da si na login stranici)
-  await this.waitUntilVisible(this.loginButton, 20000);
-  await expect(await browser.getUrl()).to.include('/auth/login');
-}
+  //ASSERTIONS (WDIO expect)
 
+  async expectOnLoginPage() {
+    await this.waitUntilVisible(this.loginButton, 20000);
+    await expect(await browser.getUrl()).to.include("/auth/login");
+  }
 
   async expectOnAccountPage() {
-  await browser.waitUntil(
-    async () => (await browser.getUrl()).includes("/account"),
-    {
-      timeout: 5000,
-      timeoutMsg: `Expected to be on /account page but got ${await browser.getUrl()}`,
-    }
-  );
-}
-
+    await browser.waitUntil(
+      async () => {
+        const url = await browser.getUrl();
+        const header = await $("h1")
+          .getText()
+          .catch(() => "");
+        return url.includes("/account") && header.includes("My account");
+      },
+      {
+        timeout: 20000,
+        interval: 500,
+        timeoutMsg: `Expected to be on account page but got ${await browser.getUrl()}`,
+      }
+    );
+    await expect(await browser.getUrl()).to.include("/account");
+    const header = await $("h1").getText();
+    await expect(header).to.equal("My account");
+  }
 
   async expectEmailError(message) {
     const text = await this.emailError.getText();

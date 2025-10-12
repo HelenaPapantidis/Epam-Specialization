@@ -1,73 +1,80 @@
 const BasePage = require("../pages/page.js");
 
-class RegisterPage extends BasePage {
-  get form() {
-    return this.el('[data-test="register-form"]');
-  }
-  get firstName() {
-    return this.el('[data-test="first-name"]');
-  }
-  get lastName() {
-    return this.el('[data-test="last-name"]');
-  }
-  get dob() {
-    return this.el('[data-test="dob"]');
-  }
-  get street() {
-    return this.el('[data-test="street"]');
-  }
-  get postalCode() {
-    return this.el('[data-test="postal_code"]');
-  }
-  get city() {
-    return this.el('[data-test="city"]');
-  }
-  get state() {
-    return this.el('[data-test="state"]');
-  }
-  get country() {
-    return this.el('[data-test="country"]');
-  }
-  get phone() {
-    return this.el('[data-test="phone"]');
-  }
-  get email() {
-    return this.el('[data-test="email"]');
-  }
-  get password() {
-    return this.el(
-      'app-password-input[formcontrolname="password"] input, input[type="password"]'
-    );
-  }
-  get submit() {
-    return this.el('[data-test="register-submit"]');
-  }
+class RegistrationPage extends BasePage {
+  // NAVIGATION
 
-  /* ===========================
-   * ACTIONS
-   * ===========================
-   */
   async openRegistrationPage() {
     await this.open("auth/register");
   }
 
+  // SELECTORS
+
+  get firstNameInput() {
+    return this.el('input[data-test="first-name"]');
+  }
+  get lastNameInput() {
+    return this.el('input[data-test="last-name"]');
+  }
+  get birthDateInput() {
+    return this.el('input[data-test="dob"]');
+  }
+  get streetInput() {
+    return this.el('input[data-test="street"]');
+  }
+  get postalInput() {
+    return this.el('input[data-test="postal_code"]');
+  }
+  get cityInput() {
+    return this.el('input[data-test="city"]');
+  }
+  get stateInput() {
+    return this.el('input[data-test="state"]');
+  }
+  get countrySelect() {
+    return this.el('select[data-test="country"]');
+  }
+  get phoneInput() {
+    return this.el('input[data-test="phone"]');
+  }
+  get emailInput() {
+    return this.el('input[data-test="email"]');
+  }
+  get passwordInput() {
+    return this.el('input[data-test="password"]');
+  }
+  get registerButton() {
+    return this.el('[data-test="register-submit"]');
+  }
+
+  // ACTIONS
+
   async registerNewUser(user) {
-    await this.waitUntilExists(this.form);
+    await this.type(this.firstNameInput, user.first);
+    await this.type(this.lastNameInput, user.last);
+    await this.type(this.birthDateInput, user.birth);
+    await this.type(this.streetInput, user.addr.street);
+    await this.type(this.postalInput, user.addr.postal);
+    await this.type(this.cityInput, user.addr.city);
+    await this.type(this.stateInput, user.addr.state);
 
-    await this.type(this.firstName, user.first);
-    await this.type(this.lastName, user.last);
-    await this.type(this.dob, user.birth);
-    await this.type(this.street, user.addr.street);
-    await this.type(this.postalCode, user.addr.postal);
-    await this.type(this.city, user.addr.city);
-    await this.type(this.state, user.addr.state);
-    await this.country.selectByVisibleText("Serbia");
-    await this.type(this.phone, user.contact.phone);
-    await this.type(this.email, user.email);
-    await this.type(this.password, user.password);
+    // Country dropdown
+    if (user.addr.country) {
+      const countryDropdown = await this.countrySelect;
+      await countryDropdown.selectByVisibleText(user.addr.country);
+    }
 
-    await this.submit.click();
+    await this.type(this.phoneInput, user.contact.phone);
+    await this.type(this.emailInput, user.email);
+    await this.type(this.passwordInput, user.password);
+
+    // submit the registration form
+    await this.click(this.registerButton);
+    await browser.waitUntil(async () => (await browser.getUrl()).includes("/auth/login"), {
+      timeout: 15000,
+      interval: 500,
+      timeoutMsg: "User was not redirected to login page after registration",
+    });
   }
 }
 
-module.exports = new RegisterPage();
+module.exports = new RegistrationPage();

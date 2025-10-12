@@ -5,13 +5,13 @@ class CategoryPage extends BasePage {
    * GETTERS
    * ===========================
    */
-//title of category page
+  //title of category page
   get categoryTitle() {
     return this.el('[data-test="page-title"]');
   }
-get productCardLinks() {
-  return this.els('a[data-test^="product-"]'); 
-}
+  get productCardLinks() {
+    return this.els('a[data-test^="product-"]');
+  }
   get productNames() {
     return this.els('h5[data-test="product-name"]');
   }
@@ -20,12 +20,11 @@ get productCardLinks() {
     return this.els('span[data-test="product-price"]');
   }
 
-
   /* ===========================
    * ACTIONS
    * ===========================
    */
- 
+
   async verifyProductsHaveNameAndPrice() {
     const names = await this.productNames;
     const prices = await this.productPrices;
@@ -39,16 +38,14 @@ get productCardLinks() {
     }
   }
 
-async verifyProductListNotEmpty() {
-    await browser.waitUntil(
-      async () => (await this.productCardLinks).length > 0,
-      { timeout: 10000, timeoutMsg: "No products were displayed" }
-    );
+  async verifyProductListNotEmpty() {
+    await browser.waitUntil(async () => (await this.productCardLinks).length > 0, {
+      timeout: 10000,
+      timeoutMsg: "No products were displayed",
+    });
     const products = await this.productCardLinks;
     expect(products.length).to.be.greaterThan(0, "No products were displayed");
   }
-
-
 }
 
 module.exports = new CategoryPage();

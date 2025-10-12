@@ -1,4 +1,4 @@
-const {RegistrationPage,LoginPage} = require("../po");
+const { RegistrationPage, LoginPage } = require("../po");
 const { registrationUser, loginCreds } = require("../test-data/users");
 
 async function registerAndLogin() {
