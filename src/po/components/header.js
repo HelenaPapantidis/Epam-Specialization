@@ -1,8 +1,5 @@
 const BasePage = require("../pages/page.js");
-const {
-  waitForToastToDisappear,
-  safeClick,
-} = require("../../helpers/waitHelper");
+const { waitForToastToDisappear, safeClick } = require("../../helpers/waitHelper");
 
 class Header extends BasePage {
   get languageDropdownButton() {
