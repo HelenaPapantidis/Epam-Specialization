@@ -10,7 +10,6 @@
     "test:chai:categories": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/categories.feature",
     "test:chai:language": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/language.feature",
     "test:chai:basket": "wdio run ./src/config/wdio.chai.conf.js chrome --spec=./src/tests/features/basket.feature",
-   
     "test:api": "mocha ./src/tests/api/*.test.js",
     "open:report": "start ./reports/html-reports/master-report.html"
   },
@@ -30,7 +29,7 @@
     "fast-glob": "^3.3.3",
     "mocha": "^11.7.3",
     "supertest": "^7.1.4",
-    "wdio-html-nice-reporter": "^7.8.7",
+    "wdio-html-nice-reporter": "^7.9.1",
     "wdio-wait-for": "^3.1.0"
   }
 }

@@ -1,4 +1,4 @@
-const {ReportAggregator, HtmlReporter} = require('wdio-html-nice-reporter');
+const { ReportAggregator, HtmlReporter } = require("wdio-html-nice-reporter");
 let reportAggregator;
 const fg = require("fast-glob");
 require("dotenv").config();
@@ -9,7 +9,7 @@ const browserName = cliBrowser || process.env.BROWSER || "chrome";
 
 exports.config = {
   //
-  // ====================
+  // ====================t
   // Runner Configuration
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
@@ -171,39 +171,39 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
- reporters: ['spec',
-        ["html-nice", {
-            outputDir: './reports/html-reports/',
-            filename: 'report.html',
-            reportTitle: 'Test Report Title',
-            linkScreenshots: true,
-            //to show the report in a browser when done
-            showInBrowser: true,
-            collapseTests: false,
-            //to turn on screenshots after every test
-            useOnAfterCommandForScreenshot: true,
-               produceJson: true,
-        }
-        ]
+  reporters: [
+    "spec",
+    [
+      "html-nice",
+      {
+        outputDir: "./reports/html-reports/",
+        filename: "report.html",
+        reportTitle: "Test Report Title",
+        linkScreenshots: true,
+        //to show the report in a browser when done
+        showInBrowser: true,
+        collapseTests: false,
+        //to turn on screenshots after every test
+        useOnAfterCommandForScreenshot: true,
+        produceJson: true,
+      },
     ],
-      onPrepare: function(config, capabilities) {
-
+  ],
+  onPrepare: async function (config, capabilities) {
     reportAggregator = new ReportAggregator({
-        outputDir: './reports/html-reports/',
-        filename: 'master-report.html',
-        reportTitle: 'Master Report',
-        browserName: capabilities.browserName,
+      outputDir: "./reports/html-reports/",
+      filename: "master-report.html",
+      reportTitle: "Master Report",
+      browserName: capabilities.browserName,
     });
     reportAggregator.clean();
-},
+  },
 
-
-onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: async function (exitCode, config, capabilities, results) {
     (async () => {
-        await reportAggregator.createReport();
+      await reportAggregator.createReport();
     })();
-},
-
+  },
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
@@ -245,7 +245,8 @@ onComplete: function (exitCode, config, capabilities, results) {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  
+  // onPrepare: function (config, capabilities) {
+  // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -386,10 +387,8 @@ onComplete: function (exitCode, config, capabilities, results) {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
- 
-
-  
-
+  // onComplete: function(exitCode, config, capabilities, results) {
+  // },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session
